@@ -1,6 +1,6 @@
 class ProjectsController < ApplicationController
   def index
-
+     
   end
 
   def new
@@ -13,6 +13,8 @@ class ProjectsController < ApplicationController
     if @project.save
       redirect_to @project, notice: "Project Created!"
     else
+      flash.now[:error] = "Failed to create project"
+      render "new"
     end
   end
 
