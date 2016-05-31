@@ -1,4 +1,13 @@
-<%= form_for @project do |f| %>
+<% if project.errors.any? %>
+  <div class="errors_explanation">
+    <% project.errors.full_messages.each do |msg| %>
+      <ul>
+        <li><%= msg %></li>
+      </ul>
+    <% end %>
+  </div>
+<% end %>
+<%= form_for project do |f| %>
   <p>
     <%= f.label :name %><br>
     <%= f.text_field :name %>
@@ -9,5 +18,5 @@
     <%= f.text_field :description %>
   </p>
 
-  <%= f.submit "Create Project" %>
+  <%= f.submit %>
 <% end %>
