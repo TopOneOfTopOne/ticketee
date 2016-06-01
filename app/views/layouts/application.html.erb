@@ -13,10 +13,11 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-<% flash.each do |_, msg| %>
-  <%= msg %>
-<% end %>
-<%= yield %>
-
+  <div class="container">
+    <% flash.each do |_, msg| %>
+      <%= msg %>
+    <% end %>
+    <%= yield %>
+  </div>
 </body>
 </html>

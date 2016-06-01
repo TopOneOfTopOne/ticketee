@@ -1,5 +1,9 @@
 source 'https://rubygems.org'
 
+gem 'font-awesome-rails'
+
+gem 'bootstrap-sass'
+
 gem 'rails', '4.2.6'
 
 gem 'sqlite3'
