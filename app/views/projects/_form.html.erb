@@ -1,22 +1,7 @@
-<% if project.errors.any? %>
-  <div class="errors_explanation">
-    <% project.errors.full_messages.each do |msg| %>
-      <ul>
-        <li><%= msg %></li>
-      </ul>
-    <% end %>
-  </div>
-<% end %>
-<%= form_for project do |f| %>
-  <p>
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </p>
+<%= simple_form_for project do |f| %>
+  <%= f.input :name %>
 
-  <p>
-    <%= f.label :description %><br>
-    <%= f.text_field :description %>
-  </p>
+  <%= f.input :description %>
 
-  <%= f.submit %>
+  <%= f.button :submit, class: "btn btn-primary" %>
 <% end %>

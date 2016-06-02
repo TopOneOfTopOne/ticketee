@@ -1,9 +1,9 @@
-<div class="page-header">
-  <h1>The index baby <%= link_to fa_icon("plus") + " New Project", new_project_path, class: "btn btn-success" %></h1>
+<div class="header">
+  <h1>The index baby <%= link_to "New Project", new_project_path, class: "new" %></h1>
 </div>
 <% @projects.each do |project| %>
   <ul>
-    <h2><%= link_to project.name, project %></h2>
+    <h2><%= link_to project.name, project, id: "projects" %></h2>
     <p>
       <%= project.description %>
     </p>

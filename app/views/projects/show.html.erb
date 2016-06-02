@@ -1,5 +1,7 @@
 <% title(@project.name, "Project") %> <br>
-Project name: <%= @project.name %> <br>
-Project description: <%= @project.description %> <br>
-<%= link_to "Edit this project", edit_project_path(@project) %> <br>
-<%= link_to "Delete Project", project_path(@project), method: :delete %>
+<h1 class="header">
+  <%= @project.name %>
+  <%= link_to "Edit", edit_project_path(@project), class: "edit" %>
+  <%= link_to "Delete", project_path(@project), method: :delete, class: "delete" %>
+</h1>
+<p><%= @project.description %><p>

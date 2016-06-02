@@ -6,7 +6,7 @@ RSpec.feature "deleting projects" do
     visit "/"
 
     click_link "A new project"
-    click_link "Delete Project"
+    click_link "Delete"
 
     expect(page).to have_content("Successfully deleted")
     expect(page).to have_no_content("A new project")

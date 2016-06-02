@@ -6,7 +6,7 @@ RSpec.feature "Users can edit projects" do
 
     visit "/"
     click_link "A new project"
-    click_link "Edit this project"
+    click_link "Edit"
   end
   scenario "with valid input" do
     fill_in "Name", with: "Changed name of project"
@@ -21,6 +21,6 @@ RSpec.feature "Users can edit projects" do
     click_button "Update Project"
 
     expect(page).to have_content "Failed to update project"
-    expect(page).to have_content "Name can't be blank"
+    expect(page).to have_content "can't be blank"
   end
 end

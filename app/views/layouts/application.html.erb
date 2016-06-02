@@ -14,8 +14,27 @@
 </head>
 <body>
   <div class="container">
-    <% flash.each do |_, msg| %>
-      <%= msg %>
+    <div class="navbar navbar-default">
+      <div class="navbar-header">
+        <a href="#" class="navbar-brand">Ticketee</a>
+        <button class="navbar-toggle" data-toggle="collapse" data-target="#menu">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+
+      <div class="navbar-collapse collapse" id="menu">
+        <ul class="nav navbar-nav">
+          <li class="<%="active" if current_page?("/") %>"><%= link_to "Home", root_path%></li>
+        </ul>
+      </div>
+    </div>
+    <% flash.each do |key, msg| %>
+      <div class="alert alert-<%= key %> fade in">
+        <%= msg %>
+        <a href="#" data-dismiss="alert" class="close">&times;</a>
+      </div>
     <% end %>
     <%= yield %>
   </div>
