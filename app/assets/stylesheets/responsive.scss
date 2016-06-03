@@ -1,0 +1,16 @@
+@media(max-width: 480px) {
+  a.new {
+    width: 100%;
+  }
+
+  a.edit,
+  a.delete {
+    display: block;
+    margin-bottom: 10px;
+    margin-top: 5px;
+  }
+
+  h1.header {
+    margin-top: -20px;
+  }
+}
