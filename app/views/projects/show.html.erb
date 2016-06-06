@@ -11,3 +11,11 @@
 <h2 class="header">
   Tickets <%= link_to "New Ticket", new_project_ticket_path(@project), class: "new" %>
 </h2>
+<% @project.tickets.each do |ticket| %>
+  <ul>
+    <li>
+      <%= ticket.id %>-
+      <%= link_to ticket.name, [@project, ticket] %>
+    </li>
+  </ul>
+<% end %>
