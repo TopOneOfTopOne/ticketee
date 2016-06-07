@@ -32,6 +32,11 @@ class TicketsController < ApplicationController
     end
   end
 
+  def destroy
+    @ticket.destroy
+    redirect_to root_url, notice: "Deleted ticket successfully"
+  end
+
   private
     def set_project
       @project = Project.find(params[:project_id])

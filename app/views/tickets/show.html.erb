@@ -1,5 +1,11 @@
 <h2 class="header"> <%= @project.name %> </h2>
-<h3 class="header"> <%= @ticket.name %><%= link_to "Edit Ticket", [:edit, @project, @ticket], class: "edit" %></h2>
+<h3 class="header">
+   <%= @ticket.name %>
+   <div class="links">
+     <%= link_to "Edit Ticket", [:edit, @project, @ticket], class: "edit" %>
+     <%= link_to "Delete Ticket", [@project, @ticket], method: :delete, class: "delete" %>
+   </div>
+ </h2>
 <p>
   <%= simple_format @ticket.description %> <!-- simple_format method converts ruby line breaks `\n` to html ones `<br>` -->
 </p>
