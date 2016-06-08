@@ -1,8 +1,12 @@
 require 'rails_helper'
 
 RSpec.feature "Creating tickets" do
+  let(:user) { FactoryGirl.create :user }
+
   before do
     project = FactoryGirl.create(:project, name: "New project")
+
+    login_as(user)
 
     visit project_path(project)
     click_link "New Ticket"
@@ -14,6 +18,7 @@ RSpec.feature "Creating tickets" do
     click_button "Create Ticket"
 
     expect(page).to have_content("Successfully created ticket")
+    expect(page).to have_content "Author: #{user.email}"
   end
 
   scenario "With invalid information" do

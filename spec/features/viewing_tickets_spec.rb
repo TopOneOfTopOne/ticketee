@@ -1,13 +1,13 @@
 require 'rails_helper'
 
 RSpec.feature "users can view tickets" do
-  before do
-    default_project = FactoryGirl.create :project
+  let!(:project) { FactoryGirl.create :project }
+  let!(:author1) { FactoryGirl.create :user }
+  let!(:author2) { FactoryGirl.create :user }
+  let!(:ticket1) { FactoryGirl.create :ticket, project: project, author: author1}
+  let!(:ticket2) { FactoryGirl.create :ticket, name: "ticket2 name", project: project, author: author2}
 
-    default_ticket = FactoryGirl.create :ticket, project: default_project
-    ticket1        = FactoryGirl.create(:ticket, name: "ticket1 name",
-                                        project: default_project,
-                                        description: "ticket1 description.")
+  before do
     visit "/"
   end
 
@@ -15,7 +15,7 @@ RSpec.feature "users can view tickets" do
     click_link "project name"
 
     expect(page).to have_content("ticket name")
-    expect(page).to have_content("ticket1 name")
+    expect(page).to have_content("ticket2 name")
 
     click_link "ticket name"
 

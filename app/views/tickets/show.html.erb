@@ -5,7 +5,22 @@
      <%= link_to "Edit Ticket", [:edit, @project, @ticket], class: "edit" %>
      <%= link_to "Delete Ticket", [@project, @ticket], method: :delete, class: "delete" %>
    </div>
- </h2>
+ </h3>
+ <table>
+   <tr>
+     <th>Author:</th>
+     <td>
+       <%= @ticket.author.email %>
+     </td>
+   </tr>
+   <tr>
+     <th>
+       Created at:
+     </th>
+     <td>
+       <%= time_ago_in_words(@ticket.created_at) %> ago
+     </td>
+   </tr>
 <p>
   <%= simple_format @ticket.description %> <!-- simple_format method converts ruby line breaks `\n` to html ones `<br>` -->
 </p>

@@ -2,7 +2,10 @@ require 'rails_helper'
 
 RSpec.feature "Users can edit tickets" do
   let(:default_project) { FactoryGirl.create :project }
-  let(:default_ticket) { FactoryGirl.create :ticket, project: default_project }
+  let(:author) { FactoryGirl.create :user }
+  let(:default_ticket) do
+    FactoryGirl.create :ticket, project: default_project, author: author
+  end
 
   before do
     visit project_ticket_path(default_project, default_ticket)

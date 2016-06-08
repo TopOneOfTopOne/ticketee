@@ -11,6 +11,7 @@ class TicketsController < ApplicationController
 
   def create
     @ticket = @project.tickets.build(ticket_params)
+    @ticket.author = current_user
     if @ticket.save
       # [@project, @ticket] resolves to project_ticket_path(@project, @ticket)
       redirect_to [@project, @ticket], notice: "Successfully created ticket"
