@@ -1,5 +1,5 @@
 require 'rails_helper'
-RSpec.feature "Users can create projects" do
+RSpec.feature "creating projects" do
   before do
     login_as(FactoryGirl.create :user, :admin)
 

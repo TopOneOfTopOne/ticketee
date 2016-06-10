@@ -1,6 +1,13 @@
 require "rails_helper"
 
 RSpec.feature "deleting projects" do
+
+  let(:user) { FactoryGirl.create(:user, :admin) }
+
+  before do
+    login_as(user)
+  end
+
   scenario "User deletes existing project" do
     project = FactoryGirl.create(:project, name: "A new project")
     visit "/"

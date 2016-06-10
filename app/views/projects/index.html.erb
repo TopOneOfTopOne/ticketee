@@ -1,5 +1,9 @@
 <div class="header">
-  <h1>The index baby <%= link_to "New Project", new_project_path, class: "new" %></h1>
+  <h1>The index baby
+    <% admin_only do %>
+      <%= link_to "New Project", new_admin_project_path, class: "new" %>
+    <% end %>
+  </h1>
 </div>
 <% @projects.each do |project| %>
   <ul>

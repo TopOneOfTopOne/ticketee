@@ -5,21 +5,6 @@ class ProjectsController < ApplicationController
      @projects = Project.all
   end
 
-  def new
-    @project = Project.new
-  end
-
-  def create
-    @project = Project.new(project_params)
-
-    if @project.save
-      redirect_to @project, notice: "Project Created!"
-    else
-      flash.now[:error] = "Failed to create project"
-      render "new"
-    end
-  end
-
   def show
   end
 
@@ -36,12 +21,6 @@ class ProjectsController < ApplicationController
     end
   end
 
-  def destroy
-    @project.destroy
-
-    flash[:success] = "Successfully deleted"
-    redirect_to root_url
-  end
   private
     def project_params
       params.require(:project).permit(:name, :description)
