@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     root "application#index"
 
     resources :projects, only: [:create, :new, :destroy]
+    resources :users
   end
 
 end
