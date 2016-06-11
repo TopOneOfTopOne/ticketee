@@ -5,4 +5,8 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :tickets
+
+  def to_s
+    email + " " + (admin? ? "(Admin)" : "(User)")
+  end
 end
