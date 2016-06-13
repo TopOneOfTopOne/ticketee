@@ -1,16 +1,16 @@
-<h2 class="header"> <%= @project.name %> </h2>
-<h3 class="header">
+<h1 class="header"> <%= @project.name %> </h2>
+<h2 class="header">
    <%= @ticket.name %>
    <div class="links">
      <%= link_to "Edit Ticket", [:edit, @project, @ticket], class: "edit" %>
      <%= link_to "Delete Ticket", [@project, @ticket], method: :delete, class: "delete" %>
    </div>
- </h3>
+ </h2>
  <table>
    <tr>
      <th>Author:</th>
      <td>
-       <%= @ticket.author.email %>
+       <%= @ticket.author.email if @ticket.author %>
      </td>
    </tr>
    <tr>

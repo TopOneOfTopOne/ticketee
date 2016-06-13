@@ -17,6 +17,8 @@
 @import "bootstrap";
 @import "font-awesome";
 @import "responsive";
+
+/* extending bootstrap alerts */
 .alert-notice {
   @extend .alert-success;
 }
@@ -29,15 +31,18 @@
   @extend .alert-danger;
 }
 
+/* forms */
 form {
   width: 50%;
 }
 
+/* headings */
 .header {
   @extend .page-header;
   letter-spacing: 1px;
 }
 
+/* buttons */
 a.new, a.edit, a.delete {
   @extend .btn;
   &:before {
@@ -65,4 +70,18 @@ a.delete {
   &:before {
     @extend .fa-trash;
   }
+}
+
+/* Tables */
+th {
+  padding-right: 0.5em;
+}
+
+/* Word styling */
+p {
+  font-size: 1.5em;
+}
+
+h1 {
+  font-size: 3em;
 }
