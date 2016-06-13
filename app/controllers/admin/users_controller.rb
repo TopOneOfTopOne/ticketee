@@ -1,8 +1,9 @@
 class Admin::UsersController < ApplicationController
   before_action :authenticate_admin
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:show, :edit, :update, :archive]
+
   def index
-    @users = User.order :email
+    @users = User.exclude_archived.order :email
   end
 
   def new
@@ -38,7 +39,13 @@ class Admin::UsersController < ApplicationController
     end
   end
 
-  def destroy
+  def archive
+    if @user == current_user
+      redirect_to admin_users_url, notice: "Cannot archive yourself, that is dangerous"
+    else
+      @user.archive
+      redirect_to admin_users_url, notice: "Successfully archived user"
+    end
   end
 
   private
