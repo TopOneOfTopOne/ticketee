@@ -1,11 +1,13 @@
 require 'rails_helper'
 RSpec.feature "creating projects" do
+
   before do
     login_as(FactoryGirl.create :user, :admin)
 
     visit "/"
     click_link "New Project"
   end
+
   scenario "with valid input" do
     fill_in "Name", with: "This is my Name"
     fill_in "Description", with: "This is the description"
@@ -23,4 +25,5 @@ RSpec.feature "creating projects" do
     expect(page).to have_content "Failed to create project"
     expect(page).to have_content "can't be blank"
   end
+  
 end

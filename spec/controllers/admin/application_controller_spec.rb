@@ -8,7 +8,6 @@ require 'rails_helper'
 # There is no authenticate_user method avaliable to tests so an error is thrown
 # we solve this by stubbing it and returning `nil`
 RSpec.describe Admin::ApplicationController, type: :controller do
-
   let(:user) { FactoryGirl.create :user }
   before do
     allow(controller).to receive(:current_user).and_return user
@@ -23,5 +22,4 @@ RSpec.describe Admin::ApplicationController, type: :controller do
       expect(flash[:alert]).to eq "You must be admin to do that."
     end
   end
-
 end
