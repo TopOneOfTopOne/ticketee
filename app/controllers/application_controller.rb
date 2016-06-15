@@ -11,4 +11,5 @@ class ApplicationController < ActionController::Base
   def not_authorized
     redirect_to root_url, alert: "Permission denied"
   end
+  
 end
