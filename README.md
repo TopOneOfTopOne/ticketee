@@ -5,6 +5,7 @@
 * An admin user with admin powers. E.g. creating users, editing users, creating projects
 * Font awesome gem
 * Simple form gem  
+* Using global error rescuing i.e. `rescue_from Pundit::NotAuthorizedError` this is located in ApplicationController
 
 ### Testing features
 * testing features with capybara
