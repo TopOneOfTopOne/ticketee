@@ -5,4 +5,5 @@ class Project < ActiveRecord::Base
   # deleted. This can be slow so there is `:delete_all` which will delete all
   # tickets at once and ignore all callbacks.
   has_many :tickets, dependent: :destroy
+  has_many :roles, dependent: :destroy
 end

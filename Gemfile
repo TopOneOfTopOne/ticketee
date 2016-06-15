@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+
+gem 'pundit'
 gem 'devise'
 
 gem 'simple_form'

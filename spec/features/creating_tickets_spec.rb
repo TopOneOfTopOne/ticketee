@@ -1,18 +1,18 @@
 require 'rails_helper'
 
-RSpec.feature "Creating tickets" do
+RSpec.feature "Can create tickets" do
   let(:user) { FactoryGirl.create :user }
 
   before do
     project = FactoryGirl.create(:project, name: "New project")
-
+    assign_role! user, :viewer, project
     login_as(user)
 
     visit project_path(project)
     click_link "New Ticket"
   end
 
-  scenario "With valid information" do
+  scenario "with valid information" do
     fill_in "Name", with: "David Yu"
     fill_in "Description", with: "Smart Guy lol lol"
     click_button "Create Ticket"
@@ -21,7 +21,7 @@ RSpec.feature "Creating tickets" do
     expect(page).to have_content "Author: #{user.email}"
   end
 
-  scenario "With invalid information" do
+  scenario "unless invalid information" do
     click_button "Create Ticket"
 
     expect(page).to have_content("Failed to create ticket")
