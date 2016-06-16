@@ -5,7 +5,7 @@ RSpec.feature "Users can edit projects" do
   let(:project) { FactoryGirl.create(:project, name: "A new project") }
 
   before do
-    assign_role! user, :viewer, project
+    assign_role! user, :manager, project
     login_as user
 
     visit "/"

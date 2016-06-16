@@ -80,6 +80,9 @@ th {
 /* Word styling */
 p {
   font-size: 1.5em;
+  &.normal {
+    font-size: 1em;
+  }
 }
 
 h1 {

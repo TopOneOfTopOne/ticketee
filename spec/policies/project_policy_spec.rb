@@ -48,7 +48,35 @@ RSpec.describe ProjectPolicy do
   end
 
   permissions :update? do
-    pending "add some examples to (or delete) #{__FILE__}"
+    it "blocks anonymous user" do
+      expect(subject).to_not permit(nil, project)
+    end
+
+    it "allows veiwers of the project" do
+      assign_role!(user, :viewer, project)
+      expect(subject).to_not permit(user, project)
+    end
+
+    it "allows editors of the project" do
+      assign_role!(user, :editor, project)
+      expect(subject).to_not permit(user, project)
+    end
+
+    it "allows managers of the project" do
+      assign_role!(user, :manager, project)
+      expect(subject).to permit(user, project)
+    end
+
+    it "allows administrators of the project" do
+      admin = FactoryGirl.create :user, :admin
+      expect(subject).to permit(admin, project)
+    end
+
+    it "doesn't allow managers assigned to other projects" do
+      other_project = FactoryGirl.create :project
+      assign_role!(user, :manager, other_project)
+      expect(subject).to_not permit(user, project)
+    end
   end
 
   permissions :destroy? do
