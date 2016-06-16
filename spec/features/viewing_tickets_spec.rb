@@ -13,7 +13,7 @@ RSpec.feature "users can view tickets" do
     visit "/"
   end
 
-  scenario "user trying to view ticket for given project" do
+  scenario "succesfully" do
     click_link "project name"
 
     expect(page).to have_content("ticket name")
