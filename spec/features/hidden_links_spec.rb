@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature "hidden links" do
+RSpec.feature "Show correct links for" do
   let(:admin) { FactoryGirl.create :user, :admin }
   let(:user) { FactoryGirl.create :user }
   let(:project) { FactoryGirl.create :project }
@@ -11,11 +11,8 @@ RSpec.feature "hidden links" do
 
       expect(page).to_not have_link "New Project"
 
-      # There is no need for this since there is already a test to stop anonymous users
-      # from viewing projects which they do not have a role in
-      # ./spec/policies/project_policy_spec.rb
-        # visit project_path(project)
-        # expect(page).to_not have_link "Delete"
+        visit project_path(project)
+        expect(page).to_not have_link "Delete"
     end
   end
 
@@ -31,6 +28,7 @@ RSpec.feature "hidden links" do
 
       visit project_path(project)
       expect(page).to_not have_link "Delete"
+      expect(page).to_not have_link "Edit"
     end
   end
 
@@ -43,6 +41,7 @@ RSpec.feature "hidden links" do
 
       visit project_path(project)
       expect(page).to have_link "Delete"
+      expect(page).to have_link "Edit"
     end
   end
 end

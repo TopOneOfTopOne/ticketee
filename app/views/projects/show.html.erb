@@ -2,7 +2,9 @@
 <h1 class="header">
   <%= @project.name %>
   <div class="links">
-    <%= link_to "Edit", edit_project_path(@project), class: "edit" %>
+    <% if policy(@project).update? %>
+      <%= link_to "Edit", edit_project_path(@project), class: "edit" %>
+    <% end %>
     <% admin_only do %>
       <%= link_to "Delete", admin_project_path(@project), method: :delete, class: "delete" %>
     <% end %>
