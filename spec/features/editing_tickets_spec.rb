@@ -8,11 +8,13 @@ RSpec.feature "Users can edit tickets" do
   end
 
   before do
+    assign_role! author, :viewer, default_project
+    login_as author
     visit project_ticket_path(default_project, default_ticket)
     click_link "Edit Ticket"
   end
 
-  scenario "User enters valid data" do
+  scenario "successfully" do
     fill_in "Name", with: "New name"
     fill_in "Description", with: "New description here."
     click_button "Update Ticket"
@@ -22,7 +24,7 @@ RSpec.feature "Users can edit tickets" do
     expect(page).to have_content "New description here"
   end
 
-  scenario "User enters invalid data" do
+  scenario "but not with missing data" do
     fill_in "Name", with: ""
     click_button "Update Ticket"
 

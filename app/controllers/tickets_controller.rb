@@ -3,6 +3,7 @@ class TicketsController < ApplicationController
   before_action :set_ticket, except: [:create, :new]
 
   def show
+    authorize @ticket
   end
 
   def new
