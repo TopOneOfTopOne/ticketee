@@ -5,7 +5,7 @@ RSpec.feature "Can create tickets" do
 
   before do
     project = FactoryGirl.create(:project, name: "New project")
-    assign_role! user, :viewer, project
+    assign_role! user, :editor, project
     login_as(user)
 
     visit project_path(project)

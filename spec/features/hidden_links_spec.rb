@@ -29,6 +29,7 @@ RSpec.feature "Show correct links for" do
       visit project_path(project)
       expect(page).to_not have_link "Delete"
       expect(page).to_not have_link "Edit"
+      expect(page).to_not have_link "New Ticket"
     end
   end
 
@@ -42,6 +43,7 @@ RSpec.feature "Show correct links for" do
       visit project_path(project)
       expect(page).to have_link "Delete"
       expect(page).to have_link "Edit"
+      expect(page).to have_link "New Ticket"
     end
   end
 end

@@ -8,11 +8,14 @@ class TicketsController < ApplicationController
 
   def new
     @ticket = @project.tickets.build
+    authorize @ticket, :create?
   end
 
   def create
     @ticket = @project.tickets.build(ticket_params)
     @ticket.author = current_user
+    authorize @ticket
+
     if @ticket.save
       # [@project, @ticket] resolves to project_ticket_path(@project, @ticket)
       redirect_to [@project, @ticket], notice: "Successfully created ticket"
