@@ -1,8 +1,10 @@
 <h1 class="header"> <%= @project.name %> </h2>
 <h2 class="header">
-   <%= @ticket.name %>
-   <div class="links">
-     <%= link_to "Edit Ticket", [:edit, @project, @ticket], class: "edit" %>
+  <%= @ticket.name %>
+  <div class="links">
+    <% if policy(@ticket).update? %>
+      <%= link_to "Edit Ticket", [:edit, @project, @ticket], class: "edit" %>
+    <% end %>
      <%= link_to "Delete Ticket", [@project, @ticket], method: :delete, class: "delete" %>
    </div>
  </h2>

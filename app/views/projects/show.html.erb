@@ -23,7 +23,9 @@
     <li>
       <%= ticket.id %>-
       <%= link_to ticket.name, [@project, ticket] %>
-      <%= link_to "Edit Ticket", [:edit, @project, @ticket], class: "edit" %>
+      <% if policy(ticket).update? %>
+        <%= link_to "Edit Ticket", [:edit, @project, @ticket], class: "edit" %>
+      <% end %>
     </li>
   </ul>
 <% end %>
