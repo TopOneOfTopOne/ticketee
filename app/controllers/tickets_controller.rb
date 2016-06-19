@@ -40,6 +40,7 @@ class TicketsController < ApplicationController
   end
 
   def destroy
+    authorize @ticket
     @ticket.destroy
     redirect_to root_url, notice: "Deleted ticket successfully"
   end

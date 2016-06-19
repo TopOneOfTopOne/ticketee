@@ -14,6 +14,11 @@ RSpec.feature "Show correct links for" do
       # no need to test for more links like below because
       # a project show page cannot be accessed by anonymous user
     end
+    scenario "showing edit ticket link" do
+      visit project_ticket_path(project, ticket)
+      expect(page).to_not have_link "Edit Ticket"
+      expect(page).to_not have_link "Delete Ticket"
+    end
   end
 
   context "logged in user" do
@@ -36,6 +41,7 @@ RSpec.feature "Show correct links for" do
     scenario "showing edit ticket link" do
       visit project_ticket_path(project, ticket)
       expect(page).to_not have_link "Edit Ticket"
+      expect(page).to_not have_link "Delete Ticket"
     end
   end
 
@@ -56,6 +62,7 @@ RSpec.feature "Show correct links for" do
     scenario "showing edit ticket link" do
       visit project_ticket_path(project, ticket)
       expect(page).to have_link "Edit Ticket"
+      expect(page).to have_link "Delete Ticket"
     end
   end
 end

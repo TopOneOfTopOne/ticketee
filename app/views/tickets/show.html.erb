@@ -5,7 +5,9 @@
     <% if policy(@ticket).update? %>
       <%= link_to "Edit Ticket", [:edit, @project, @ticket], class: "edit" %>
     <% end %>
-     <%= link_to "Delete Ticket", [@project, @ticket], method: :delete, class: "delete" %>
+    <% if policy(@ticket).destroy? %>
+      <%= link_to "Delete Ticket", [@project, @ticket], method: :delete, class: "delete" %>
+    <% end %>
    </div>
  </h2>
  <table>

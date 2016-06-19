@@ -9,7 +9,7 @@ RSpec.feature "Deleting tickets" do
   end
 
   before do
-    assign_role! author, :viewer, project
+    assign_role! author, :manager, project
     login_as author
   end
 
