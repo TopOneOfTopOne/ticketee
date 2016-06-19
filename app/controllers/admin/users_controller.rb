@@ -1,7 +1,9 @@
 class Admin::UsersController < ApplicationController
   before_action :authenticate_admin
   before_action :set_user, only: [:show, :edit, :update, :archive]
-
+  skip_after_action :verify_authorized
+  skip_after_action :verify_policy_scoped
+  
   def index
     @users = User.exclude_archived.order :email
   end

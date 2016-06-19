@@ -1,6 +1,8 @@
 class Admin::ProjectsController < ApplicationController
   before_action :set_project, only: :destroy
   before_action :authenticate_admin
+  skip_after_action :verify_authorized
+  skip_after_action :verify_policy_scoped
 
   def new
     @project = Project.new
