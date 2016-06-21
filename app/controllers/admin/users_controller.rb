@@ -1,9 +1,10 @@
 class Admin::UsersController < ApplicationController
   before_action :authenticate_admin
   before_action :set_user, only: [:show, :edit, :update, :archive]
+  before_action :set_projects, only: [:show, :edit, :create, :update]
   skip_after_action :verify_authorized
   skip_after_action :verify_policy_scoped
-  
+
   def index
     @users = User.exclude_archived.order :email
   end
@@ -33,11 +34,22 @@ class Admin::UsersController < ApplicationController
       params[:user].delete(:password)
     end
 
-    if @user.update(user_params)
-      redirect_to admin_user_url(@user), notice: "Successfully edited user"
-    else
-      flash.now[:alert] = "Failed to edit user"
-      render "edit"
+    User.transaction do
+      @user.roles.clear
+      role_data = params.fetch :roles, []
+      role_data.each do |project_id, role_name|
+        if role_name.present?
+          @user.roles.build(project_id: project_id, role: role_name)
+        end
+      end
+
+      if @user.update(user_params)
+        redirect_to admin_users_url, notice: "Successfully edited user"
+      else
+        flash.now[:alert] = "Failed to edit user"
+        render "edit"
+        raise ActiveRecord::Rollback
+      end
     end
   end
 
@@ -68,5 +80,9 @@ class Admin::UsersController < ApplicationController
     @user = User.find(params[:id])
   rescue
     redirect_to root_url, alert: "No such user"
+  end
+
+  def set_projects
+    @projects = Project.order :name
   end
 end

@@ -4,4 +4,15 @@
     <%= link_to "Edit User", [:edit, :admin, @user], class: "edit" %>
     <%= link_to "Archive User", [:archive, :admin, @user], method: :patch, class: :delete, data: {confirm: "Are you sure?"} %>
   </div>
+  <% if @user.roles.any? %>
+    <ul>
+      <% @user.roles.each do |role| %>
+        <li><%= role.project.name %>: <%= role.role.titleize %></li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>
+      User has no roles.
+    </p>
+  <% end %>
 </h1>
