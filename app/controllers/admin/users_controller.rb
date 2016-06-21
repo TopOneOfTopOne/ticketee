@@ -1,7 +1,7 @@
 class Admin::UsersController < ApplicationController
   before_action :authenticate_admin
   before_action :set_user, only: [:show, :edit, :update, :archive]
-  before_action :set_projects, only: [:show, :edit, :create, :update]
+  before_action :set_projects, only: [:show, :edit, :create, :new]
   skip_after_action :verify_authorized
   skip_after_action :verify_policy_scoped
 
@@ -15,6 +15,7 @@ class Admin::UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
+    build_roles_for(@user)
     if @user.save
       redirect_to admin_users_url, notice: "Successfully created user"
     else
@@ -36,12 +37,7 @@ class Admin::UsersController < ApplicationController
 
     User.transaction do
       @user.roles.clear
-      role_data = params.fetch :roles, []
-      role_data.each do |project_id, role_name|
-        if role_name.present?
-          @user.roles.build(project_id: project_id, role: role_name)
-        end
-      end
+      build_roles_for(@user)
 
       if @user.update(user_params)
         redirect_to admin_users_url, notice: "Successfully edited user"
@@ -64,25 +60,34 @@ class Admin::UsersController < ApplicationController
 
   private
 
-  def user_params
-    params.require(:user).permit(:password, :email, :admin)
-  end
-
-  def authenticate_admin
-    authenticate_user!
-
-    unless current_user.admin?
-      redirect_to root_url, alert: "You must be admin to do that."
+    def user_params
+      params.require(:user).permit(:password, :email, :admin)
     end
-  end
 
-  def set_user
-    @user = User.find(params[:id])
-  rescue
-    redirect_to root_url, alert: "No such user"
-  end
+    def authenticate_admin
+      authenticate_user!
 
-  def set_projects
-    @projects = Project.order :name
-  end
+      unless current_user.admin?
+        redirect_to root_url, alert: "You must be admin to do that."
+      end
+    end
+
+    def set_user
+      @user = User.find(params[:id])
+    rescue
+      redirect_to root_url, alert: "No such user"
+    end
+
+    def set_projects
+      @projects = Project.order :name
+    end
+
+    def build_roles_for(user)
+      role_data = params.fetch :roles, []
+      role_data.each do |project_id, role_name|
+        if role_name.present?
+          user.roles.build(project_id: project_id, role: role_name)
+        end
+      end
+    end
 end

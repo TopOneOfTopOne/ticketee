@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :tickets
-  has_many :roles
+  has_many :roles, dependent: :destroy
 
   def to_s
     email + " " + (admin? ? "(Admin)" : "(User)")

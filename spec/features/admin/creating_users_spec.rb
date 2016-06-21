@@ -2,6 +2,7 @@ require "rails_helper"
 
 RSpec.feature "creating users with admin" do
   let(:admin) { FactoryGirl.create :user, :admin }
+  let!(:project) { FactoryGirl.create :project, name: "project name" }
 
   before do
     login_as admin
@@ -30,5 +31,18 @@ RSpec.feature "creating users with admin" do
 
     expect(page).to have_content "Successfully created user"
     expect(page).to have_content "admin@test.com (Admin)"
+  end
+
+  scenario "when assigning user a role" do
+    fill_in "Email", with: "example@test.com"
+    fill_in "Password", with: "password"
+    select "Manager", from: "project name"
+
+    click_button "Create User"
+
+    expect(page).to have_content "Successfully created user"
+    click_link "example@test.com"
+
+    expect(page).to have_content "project name: Manager"
   end
 end
