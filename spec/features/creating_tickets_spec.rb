@@ -39,4 +39,17 @@ RSpec.feature "Can create tickets" do
     expect(page).to have_content("Successfully created ticket")
     expect(page).to have_content("sampleText.txt")
   end
+
+  scenario "uploaded file persists when re-rendering" do
+    attach_file "File", "spec/fixtures/sampleText.txt"
+    click_button "Create Ticket"
+
+    fill_in "Name", with: "A ticket"
+    fill_in "Description", with: "the ticket description"
+
+    click_button "Create Ticket"
+
+    expect(page).to have_content("Successfully created ticket")
+    expect(page).to have_content("sampleText.txt")
+  end
 end
