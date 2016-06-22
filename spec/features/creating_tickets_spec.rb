@@ -28,4 +28,15 @@ RSpec.feature "Can create tickets" do
     expect(page).to have_content("Name can't be blank")
     expect(page).to have_content("Description can't be blank")
   end
+
+  scenario "with attachment" do
+    fill_in "Name", with: "A ticket"
+    fill_in "Description", with: "the ticket description"
+    attach_file "File", "spec/fixtures/sampleText.txt"
+
+    click_button "Create Ticket"
+
+    expect(page).to have_content("Successfully created ticket")
+    expect(page).to have_content("sampleText.txt")
+  end
 end

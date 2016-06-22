@@ -28,3 +28,19 @@
 <p>
   <%= simple_format @ticket.description %> <!-- simple_format method converts ruby line breaks `\n` to html ones `<br>` -->
 </p>
+
+<% if @ticket.attachment.present? %>
+  <h4>Attachment</h4>
+  <p>
+    <% if @ticket.attachment.present? %>
+      <h4>Attachment</h4>
+      <div class="attachment">
+        <p>
+          <%= link_to File.basename(@ticket.attachment.url),
+            @ticket.attachment.url %>
+         (<%= number_to_human_size(@ticket.attachment.size) %>)
+        </p>
+     </div>
+     <% end %>
+  </p>
+<% end %>
