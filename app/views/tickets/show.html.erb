@@ -29,18 +29,15 @@
   <%= simple_format @ticket.description %> <!-- simple_format method converts ruby line breaks `\n` to html ones `<br>` -->
 </p>
 
-<% if @ticket.attachment.present? %>
+<% if @ticket.attachments.any? %>
   <h4>Attachment</h4>
-  <p>
-    <% if @ticket.attachment.present? %>
-      <h4>Attachment</h4>
-      <div class="attachment">
+    <div class="attachment">
+      <% @ticket.attachments.each do |attachment| %>
         <p>
-          <%= link_to File.basename(@ticket.attachment.url),
-            @ticket.attachment.url %>
-         (<%= number_to_human_size(@ticket.attachment.size) %>)
+          <%= link_to File.basename(attachment.file.url),
+            attachment.file.url %>
+         (<%= number_to_human_size(attachment.file.size) %>)
         </p>
-     </div>
-     <% end %>
-  </p>
+      <% end %>
+    </div>
 <% end %>

@@ -6,6 +6,7 @@
 * Font awesome gem
 * Simple form gem  
 * Using global error rescuing i.e. `rescue_from Pundit::NotAuthorizedError` this is located in ApplicationController
+* nested attributes
 
 ### Testing features
 * testing features with capybara
