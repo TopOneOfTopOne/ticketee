@@ -3,9 +3,11 @@ source 'https://rubygems.org'
 gem 'carrierwave'
 gem 'pundit'
 gem 'devise'
-
+gem 'capybara-webkit'
 gem 'simple_form'
-
+# turned off transactional fixtures to use javascript in tests
+# Use this gem now to delete test data in test database
+gem "database_cleaner"
 gem 'font-awesome-rails'
 
 gem 'bootstrap-sass'
@@ -24,8 +26,6 @@ gem 'coffee-rails', '~> 4.1.0'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
-# Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
